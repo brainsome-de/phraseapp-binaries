@@ -1,5 +1,5 @@
 module Phraseapp
   module Binaries
-    VERSION = "1.3.0"
+    VERSION = "1.6.0"
   end
 end

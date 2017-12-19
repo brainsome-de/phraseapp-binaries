@@ -1,24 +1,23 @@
 #!/bin/ruby
 
-
 require 'rubygems'
 
 module PhraseAppBinaries
-  LINUX_EXECUTABLE = "phraseapp_linux_amd64"
-  DARWIN_EXECUTABLE = "phraseapp_macosx_amd64"
+  LINUX_EXECUTABLE = 'phraseapp_linux_amd64'.freeze
+  DARWIN_EXECUTABLE = 'phraseapp_macosx_amd64'.freeze
 end
 
 gem_path = Gem.loaded_specs['phraseapp-binaries'] && Gem.loaded_specs['phraseapp-binaries'].full_gem_path
 
 unless gem_path.nil?
-  executable_name = if RUBY_PLATFORM == "x86_64-linux"
+  executable_name = if RUBY_PLATFORM == 'x86_64-linux'
                       PhraseAppBinaries::LINUX_EXECUTABLE
                     elsif RUBY_PLATFORM =~ /darwin/
                       PhraseAppBinaries::DARWIN_EXECUTABLE
                     end
   phraseapp_binary = File.join(gem_path, 'exe', executable_name).to_s
 
-  if File.exists?(phraseapp_binary)
+  if File.exist?(phraseapp_binary)
     Kernel.system(phraseapp_binary, *ARGV)
   else
     puts "Rubygem phraseapp-binary: No binary found for platforom #{RUBY_PLATFORM}"
